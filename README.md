@@ -1,3 +1,3 @@
 # network-automation
 
-Collection of ansible playbooks and InfraAsCode nuggets  
+Collection of ansible playbooks and little InfraAsCode nuggets  
