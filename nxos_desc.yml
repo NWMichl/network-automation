@@ -1,0 +1,24 @@
+---
+- name: NX-OS => Show all Interfaces with specific Description
+  vars_prompt:
+    - name: "hostgroup"
+      prompt: "Enter hostgroup (osha, osdd, ...) to play with, default:"
+      private: no
+      default: "osdd"
+    - name: "desc"
+      prompt: "Enter string to search for"
+      private: no
+  hosts: "{{hostgroup}}"
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+  - name: show interface description
+    nxos_command:
+      commands: show interface descr | incl {{ desc }}
+    register: result
+
+  - debug:
+      msg: "{{ result.stdout_lines }}"
+    when: result.stdout[0] != ""
