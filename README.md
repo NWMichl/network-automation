@@ -2,7 +2,7 @@
 
 Collection of ansible playbooks and little InfraAsCode nuggets
 
-### nxos_desc.yml: Search for a interface description
+### nxos_desc.yml: Search for an interface description
 
 If you are documenting names of endhosts or servers using the interface description and have no easy way to fetch this information in some form of central config management tool, this one is for you!
 The playbook prompts for a hostgroup of the ansible inventory as well as the search string and loops over all those devices.
