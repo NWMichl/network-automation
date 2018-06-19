@@ -10,9 +10,9 @@ The playbook prompts for a hostgroup of the ansible inventory as well as the sea
 Use 
 
 ```
-ansible-playbook -k nxos_desc.yml
+ansible-playbook -k nxos_desc.yml --limit <hostgroup>
 ```
 
 to log into the hosts with the local linux user (SSH password prompt).
 
-Tested with ansible 2.3 on RHEL6 and Cisco Nexus 9300/9500, but works with Catalyst (6500 VSS, 3560, 2960, ...) as well.
+Tested with ansible 2.5.3 on RHEL7 and Cisco Nexus 9300/9500, but works with Catalyst (6500 VSS, 3560, 2960, ...) as well.
