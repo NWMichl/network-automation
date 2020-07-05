@@ -16,3 +16,13 @@ ansible-playbook -k nxos_desc.yml --limit <hostgroup>
 to log into the hosts with the local linux user (SSH password prompt).
 
 Tested with ansible 2.5.3 on RHEL7 and Cisco Nexus 9300/9500, but works with Catalyst (6500 VSS, 3560, 2960, ...) as well.
+
+### fix_ifdesc.yml: Configures Interface Description Based on CDP / LLDP
+
+The playbook fetches all discovered neighbors per device and sets the Interface description accordingly.
+
+Use 
+
+```
+ansible-playbook -k fix_ifdesc.yml
+```
