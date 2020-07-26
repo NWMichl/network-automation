@@ -15,13 +15,17 @@
         path: ~/{{ query }}.txt
         line: "[{{ inventory_hostname }}] {{item.key}} via CDP/LLDP [{{ item.value[0].host }}]"
         create: yes
-      with_dict: "{{ ansible_facts.net_neighbors }}"
+      loop: "{{ ansible_facts.net_neighbors | dict2items }}"
+      loop_control:
+        label: "{{ item.key }}"
       when: query in item.value[0].host
 
     - name: Find query string in net_interfaces
       lineinfile:
         path: ~/{{ query }}.txt
-        line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc [{{ item.value.description }}]"
+        line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc: [{{ item.value.description }}]"
         create: yes
-      with_dict: "{{ ansible_facts.net_interfaces }}"
+      loop: "{{ ansible_facts.net_interfaces | dict2items }}"
+      loop_control:
+        label: "{{ item.key }}"
       when: item.value.description is defined and item.value.description and query in item.value.description
