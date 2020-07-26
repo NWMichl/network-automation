@@ -1,5 +1,5 @@
 ---
-- name: Query for connected hosts via Interface Description and CDP/LLDP learnings
+- name: Query for connected hosts via ifDesc and CDP/LLDP learnings
   hosts: all
   gather_facts: yes
   connection: network_cli
@@ -10,12 +10,15 @@
 
   tasks:
 
+    - debug:
+        msg: "{{ ansible_facts.net_interfaces }}"
+
     - name: Find query string in net_neighbors
       lineinfile:
         path: ~/{{ query }}.txt
         line: "[{{ inventory_hostname }}] {{item.key}} via CDP/LLDP [{{ item.value[0].host }}]"
         create: yes
-      with_dict: "{{ansible_facts.net_neighbors }}"
+      with_dict: "{{ ansible_facts.net_neighbors }}"
       when: query in item.value[0].host
 
     - name: Find query string in net_interfaces
@@ -23,5 +26,6 @@
         path: ~/{{ query }}.txt
         line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc: [{{ item.value.description }}]"
         create: yes
-      with_dict: "{{ansible_facts.net_interfaces }}"
-      when: item.value.description and query in item.value.description
+      with_dict: "{{ ansible_facts.net_interfaces }}"
+      when: item.value.description is defined and item.value.description and query in item.value.description
+      
