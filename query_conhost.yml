@@ -10,9 +10,6 @@
 
   tasks:
 
-    - debug:
-        msg: "{{ ansible_facts.net_interfaces }}"
-
     - name: Find query string in net_neighbors
       lineinfile:
         path: ~/{{ query }}.txt
@@ -24,8 +21,7 @@
     - name: Find query string in net_interfaces
       lineinfile:
         path: ~/{{ query }}.txt
-        line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc: [{{ item.value.description }}]"
+        line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc [{{ item.value.description }}]"
         create: yes
       with_dict: "{{ ansible_facts.net_interfaces }}"
       when: item.value.description is defined and item.value.description and query in item.value.description
-      
