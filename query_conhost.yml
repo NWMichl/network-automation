@@ -1,0 +1,27 @@
+---
+- name: Query for connected hosts via Interface Description and CDP/LLDP learnings
+  hosts: all
+  gather_facts: yes
+  connection: network_cli
+  vars_prompt:
+    - name: "query"
+      prompt: "Enter query"
+      private: no
+
+  tasks:
+
+    - name: Find query string in net_neighbors
+      lineinfile:
+        path: ~/{{ query }}.txt
+        line: "[{{ inventory_hostname }}] {{item.key}} via CDP/LLDP [{{ item.value[0].host }}]"
+        create: yes
+      with_dict: "{{ansible_facts.net_neighbors }}"
+      when: query in item.value[0].host
+
+    - name: Find query string in net_interfaces
+      lineinfile:
+        path: ~/{{ query }}.txt
+        line: "[{{ inventory_hostname }}] {{item.key}} via IfDesc: [{{ item.value.description }}]"
+        create: yes
+      with_dict: "{{ansible_facts.net_interfaces }}"
+      when: item.value.description and query in item.value.description
