@@ -9,7 +9,7 @@ Usage:
 ansible-playbook -k query_conhost.yml
 ```
 
-The playbook prompts for the string to search in the Interface Description field of all devices, as well as the CDP/LLDP neigbour discovery.
+The playbook prompts for the string to search in the Interface Description field of all devices, as well as the CDP/LLDP neigbor discovery.
 The result will be stored to a file named <query>.txt in the home Directory of the current user.
 
 ### nxos_desc.yml: Search for an interface description
