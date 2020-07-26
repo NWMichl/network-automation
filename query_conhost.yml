@@ -17,7 +17,7 @@
         create: yes
       loop: "{{ ansible_facts.net_neighbors | dict2items }}"
       loop_control:
-        label: "{{ item.key }}"
+        label: "{{ item.key }} Neighbor: {{ item.value[0].host }}"
       when: query in item.value[0].host
 
     - name: Find query string in net_interfaces
@@ -27,5 +27,5 @@
         create: yes
       loop: "{{ ansible_facts.net_interfaces | dict2items }}"
       loop_control:
-        label: "{{ item.key }}"
+        label: "{{ item.key }} ifDesc: {{ item.value.description }}"
       when: item.value.description is defined and item.value.description and query in item.value.description
