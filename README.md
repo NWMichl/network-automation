@@ -6,7 +6,7 @@ Collection of ansible playbooks and little InfraAsCode nuggets
 
 Usage:
 ```
-ansible-playbook -k query_conhosts.yml
+ansible-playbook -k query_conhost.yml
 ```
 
 The playbook prompts for the string to search in the Interface Description field of all devices, as well as the CDP/LLDP neigbour discovery.
