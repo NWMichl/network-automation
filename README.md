@@ -2,6 +2,16 @@
 
 Collection of ansible playbooks and little InfraAsCode nuggets
 
+### query_conhost.yml: Search for string in Interface Description and CDP/LLDP learnings
+
+Usage:
+```
+ansible-playbook -k query_conhosts.yml
+```
+
+The playbook prompts for the string to search in the Interface Description field of all devices, as well as the CDP/LLDP neigbour discovery.
+The result will be stored to a file named <query>.txt in the home Directory of the current user.
+
 ### nxos_desc.yml: Search for an interface description
 
 If you are documenting names of endhosts or servers using the interface description and have no easy way to fetch this information in some form of central config management tool, this one is for you!
